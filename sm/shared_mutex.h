@@ -9,6 +9,9 @@ public:
   shared_mutex() : m_readerCount(0),
                    m_writeInProgress(false) {}
 
+  shared_mutex(const shared_mutex&) = delete;
+  shared_mutex& operator=(const shared_mutex&) = delete;
+
   void lock() {
     std::unique_lock<std::mutex> lock(m_mutex);
     m_writeCond.wait(lock, [this]() {
