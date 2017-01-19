@@ -75,4 +75,19 @@ private:
   size_t m_readerCount;
   bool m_writeInProgress;
 };
+
+template<typename LockType>
+class shared_lock {
+public:
+  shared_lock(LockType& lock) : m_lock(lock) {
+    m_lock.lock_shared();
+  }
+
+  ~shared_lock() {
+    m_lock.unlock_shared();
+  }
+
+private:
+  LockType& m_lock;
+};
 }
