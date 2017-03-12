@@ -22,7 +22,7 @@ public:
   template<typename F>
   static std::thread start(sm::shared_mutex& mutex, F f) {
     return std::thread(
-        [f, reader = std::make_unique<Reader>(mutex)]() mutable {
+        [f, reader = std::unique_ptr<Reader>(new Reader(mutex))]() mutable {
           f(std::move(reader));
         });
   }
