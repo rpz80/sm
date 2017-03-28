@@ -5,5 +5,5 @@ add_executable(${PROJECT_NAME} ${SRC})
 
 target_link_libraries(${PROJECT_NAME})
 if (NOT MSVC)
-  target_link_libraries(-pthread)
+  target_link_libraries(${PROJECT_NAME} -pthread)
 endif()
